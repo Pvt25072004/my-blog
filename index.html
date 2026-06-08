@@ -1,0 +1,2548 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pham Van Tien | Front-end Developer Fresher</title>
+    <meta name="description"
+        content="Portfolio of Pham Van Tien, a Front-end Developer Fresher experienced in ReactJS, JavaScript, REST API, NodeJS/NestJS, and real-world web projects." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #14B8A6;
+            --accent: #38BDF8;
+            --bg: #0F172A;
+            --bg2: #1E293B;
+            --bg3: #0F172A;
+            --card: #1E293B;
+            --border: #334155;
+            --text: #F1F5F9;
+            --text2: #CBD5E1;
+            --muted: #64748B;
+            --radius: 14px;
+        }
+
+        html.light {
+            --bg: #F8FAFC;
+            --bg2: #FFFFFF;
+            --bg3: #F1F5F9;
+            --card: #FFFFFF;
+            --border: #E2E8F0;
+            --text: #0F172A;
+            --text2: #334155;
+            --muted: #64748B;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background .3s, color .3s;
+        }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            height: 64px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            transition: background .3s;
+        }
+
+        html.light nav {
+            background: rgba(248, 250, 252, 0.9);
+        }
+
+        .nav-logo {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: .875rem;
+            font-weight: 500;
+            color: var(--text2);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-btn {
+            background: none;
+            border: 1.5px solid var(--border);
+            color: var(--text2);
+            padding: .4rem .7rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all .2s;
+        }
+
+        .theme-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: .3s;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 64px;
+            left: 0;
+            right: 0;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            z-index: 99;
+            padding: 1.5rem 2rem;
+        }
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: .75rem 0;
+            font-size: .95rem;
+            color: var(--text2);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-menu a:last-child {
+            border: none;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--primary);
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-tag {
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: .75rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1.15;
+        }
+
+        .section-title span {
+            color: var(--primary);
+        }
+
+        .section-sub {
+            color: var(--muted);
+            font-size: .95rem;
+            margin-top: .75rem;
+            max-width: 560px;
+        }
+
+        /* HERO */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 7rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            background: rgba(20, 184, 166, .1);
+            border: 1px solid rgba(20, 184, 166, .3);
+            color: var(--primary);
+            padding: .35rem .85rem;
+            border-radius: 999px;
+            font-size: .8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-badge::before {
+            content: '●';
+            font-size: .5rem;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .3
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            color: var(--text);
+        }
+
+        .hero-title .name {
+            color: var(--primary);
+            display: block;
+        }
+
+        .hero-title .role {
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            font-weight: 600;
+            color: var(--accent);
+            display: block;
+            margin-top: .4rem;
+            letter-spacing: -.5px;
+        }
+
+        .hero-desc {
+            color: var(--text2);
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            max-width: 480px;
+            line-height: 1.8;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            padding: .75rem 1.75rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: .9rem;
+            text-decoration: none;
+            transition: all .2s;
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        .btn-primary:hover {
+            background: #0d9488;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(20, 184, 166, .35);
+        }
+
+        .btn-outline {
+            border: 1.5px solid var(--border);
+            color: var(--text2);
+            padding: .75rem 1.75rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: .9rem;
+            text-decoration: none;
+            transition: all .2s;
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat-num {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: .75rem;
+            color: var(--muted);
+            margin-top: .2rem;
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-canvas {
+            width: 100%;
+            max-width: 420px;
+            aspect-ratio: 1;
+            position: relative;
+        }
+
+        .code-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: .8rem;
+            line-height: 1.7;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .3);
+        }
+
+        .code-bar {
+            display: flex;
+            gap: .5rem;
+            margin-bottom: 1rem;
+        }
+
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .c-red {
+            background: #FF5F57;
+        }
+
+        .c-yellow {
+            background: #FFBD2E;
+        }
+
+        .c-green {
+            background: #28CA41;
+        }
+
+        .code-line {
+            display: flex;
+            gap: .75rem;
+        }
+
+        .ln {
+            color: #475569;
+            user-select: none;
+            min-width: 1.2rem;
+            text-align: right;
+        }
+
+        .kw {
+            color: #C084FC;
+        }
+
+        .fn {
+            color: #60A5FA;
+        }
+
+        .st {
+            color: #34D399;
+        }
+
+        .cm {
+            color: #64748B;
+        }
+
+        .tx {
+            color: #F1F5F9;
+        }
+
+        .floating-badge {
+            position: absolute;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: .5rem .9rem;
+            font-size: .75rem;
+            font-weight: 600;
+            color: var(--text);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .2);
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-badge.b1 {
+            top: -20px;
+            right: 10px;
+            animation-delay: 0s;
+        }
+
+        .floating-badge.b2 {
+            bottom: 10px;
+            left: -10px;
+            animation-delay: 1s;
+        }
+
+        .floating-badge.b3 {
+            top: 45%;
+            right: -20px;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-8px)
+            }
+        }
+
+        /* ABOUT */
+        #about {
+            background: var(--bg2);
+            border-radius: 24px;
+            margin: 0 1rem 2rem;
+            padding: 5rem 3rem;
+            max-width: calc(1200px - 2rem);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-top: 3rem;
+        }
+
+        .about-text p {
+            color: var(--text2);
+            line-height: 1.9;
+            margin-bottom: 1.2rem;
+            font-size: .95rem;
+        }
+
+        .about-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .info-item {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: .85rem 1rem;
+        }
+
+        .info-label {
+            font-size: .7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted);
+        }
+
+        .info-val {
+            font-size: .9rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-top: .2rem;
+        }
+
+        .about-highlight {
+            background: linear-gradient(135deg, rgba(20, 184, 166, .08), rgba(56, 189, 248, .06));
+            border: 1px solid rgba(20, 184, 166, .2);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .highlight-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        .timeline-mini {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .tm-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .tm-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary);
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+
+        .tm-content {
+            font-size: .85rem;
+        }
+
+        .tm-title {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .tm-sub {
+            color: var(--muted);
+            font-size: .78rem;
+            margin-top: .1rem;
+        }
+
+        /* SKILLS */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .skill-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            transition: transform .2s, border-color .2s, box-shadow .2s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 12px 32px rgba(20, 184, 166, .1);
+        }
+
+        .skill-card-header {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(20, 184, 166, .1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .skill-card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+        }
+
+        .skill-tag {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--text2);
+            padding: .3rem .75rem;
+            border-radius: 6px;
+            font-size: .78rem;
+            font-weight: 500;
+            transition: all .15s;
+            cursor: default;
+        }
+
+        .skill-tag:hover {
+            background: rgba(20, 184, 166, .1);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* PROJECTS */
+        .projects-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+        }
+
+        .view-all {
+            font-size: .85rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: .3rem;
+        }
+
+        .projects-featured {
+            margin-bottom: 2rem;
+        }
+
+        .project-card-main {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+            transition: border-color .2s, box-shadow .2s;
+        }
+
+        .project-card-main:hover {
+            border-color: var(--primary);
+            box-shadow: 0 16px 48px rgba(20, 184, 166, .1);
+        }
+
+        .project-badge {
+            display: inline-flex;
+            gap: .5rem;
+            margin-bottom: 1rem;
+        }
+
+        .badge {
+            font-size: .7rem;
+            font-weight: 700;
+            padding: .25rem .65rem;
+            border-radius: 999px;
+            letter-spacing: .5px;
+        }
+
+        .badge-team {
+            background: rgba(20, 184, 166, .1);
+            color: var(--primary);
+            border: 1px solid rgba(20, 184, 166, .25);
+        }
+
+        .badge-leader {
+            background: rgba(251, 191, 36, .1);
+            color: #F59E0B;
+            border: 1px solid rgba(251, 191, 36, .25);
+        }
+
+        .badge-solo {
+            background: rgba(56, 189, 248, .1);
+            color: var(--accent);
+            border: 1px solid rgba(56, 189, 248, .25);
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: .75rem;
+        }
+
+        .project-desc {
+            color: var(--text2);
+            font-size: .9rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stack-tag {
+            background: rgba(20, 184, 166, .08);
+            color: var(--primary);
+            border: 1px solid rgba(20, 184, 166, .2);
+            padding: .25rem .65rem;
+            border-radius: 6px;
+            font-size: .75rem;
+            font-weight: 600;
+        }
+
+        .project-links {
+            display: flex;
+            gap: .75rem;
+        }
+
+        .proj-link {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            font-size: .83rem;
+            font-weight: 600;
+            padding: .55rem 1.1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all .2s;
+        }
+
+        .proj-link.github {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--text2);
+        }
+
+        .proj-link.github:hover {
+            border-color: var(--text2);
+            color: var(--text);
+        }
+
+        .proj-link.demo {
+            background: var(--primary);
+            color: white;
+        }
+
+        .proj-link.demo:hover {
+            background: #0d9488;
+        }
+
+        .project-right {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            font-size: .8rem;
+            color: var(--text2);
+        }
+
+        .feature-item::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: 700;
+            font-size: .75rem;
+        }
+
+        .proj-detail-box {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+        }
+
+        .proj-detail-label {
+            font-size: .7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted);
+            margin-bottom: .5rem;
+        }
+
+        .proj-detail-val {
+            font-size: .85rem;
+            color: var(--text2);
+            line-height: 1.6;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .project-card-sm {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            transition: all .2s;
+        }
+
+        .project-card-sm:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 12px 32px rgba(20, 184, 166, .1);
+        }
+
+        .project-card-sm .project-title {
+            font-size: 1.1rem;
+            margin-bottom: .6rem;
+        }
+
+        /* EXPERIENCE */
+        #experience {
+            background: var(--bg2);
+            border-radius: 24px;
+            margin: 0 1rem 2rem;
+            padding: 5rem 3rem;
+            max-width: calc(1200px - 2rem);
+        }
+
+        .exp-timeline {
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .exp-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2.5rem;
+            position: relative;
+            padding-bottom: 3rem;
+        }
+
+        .exp-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .exp-item::before {
+            content: '';
+            position: absolute;
+            left: 200px;
+            top: 8px;
+            bottom: 0;
+            width: 1px;
+            background: var(--border);
+            transform: translateX(calc(-50% + 1.25rem + 1px));
+        }
+
+        .exp-item:last-child::before {
+            display: none;
+        }
+
+        .exp-left {
+            text-align: right;
+            padding-right: 2rem;
+            padding-top: .1rem;
+        }
+
+        .exp-date {
+            font-size: .78rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .exp-company {
+            font-size: .85rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-top: .25rem;
+        }
+
+        .exp-type {
+            font-size: .72rem;
+            color: var(--muted);
+            margin-top: .1rem;
+        }
+
+        .exp-right {
+            position: relative;
+            padding-left: 2.5rem;
+        }
+
+        .exp-right::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary);
+            box-shadow: 0 0 0 3px rgba(20, 184, 166, .2);
+        }
+
+        .exp-role {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .exp-desc {
+            font-size: .88rem;
+            color: var(--text2);
+            line-height: 1.8;
+            margin-top: .6rem;
+        }
+
+        /* BLOG */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .blog-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            cursor: pointer;
+            transition: all .2s;
+            text-decoration: none;
+            display: block;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 12px 32px rgba(20, 184, 166, .1);
+        }
+
+        .blog-tags {
+            display: flex;
+            gap: .4rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .blog-tag {
+            font-size: .7rem;
+            font-weight: 700;
+            padding: .2rem .6rem;
+            border-radius: 5px;
+            background: rgba(56, 189, 248, .08);
+            color: var(--accent);
+            border: 1px solid rgba(56, 189, 248, .2);
+        }
+
+        .blog-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.5;
+            margin-bottom: .75rem;
+        }
+
+        .blog-excerpt {
+            font-size: .83rem;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1.25rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .blog-date {
+            font-size: .75rem;
+            color: var(--muted);
+        }
+
+        .blog-read {
+            font-size: .75rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* CONTACT */
+        #contact {
+            background: var(--bg2);
+            border-radius: 24px;
+            margin: 0 1rem 4rem;
+            padding: 5rem 3rem;
+            max-width: calc(1200px - 2rem);
+            text-align: center;
+        }
+
+        .contact-inner {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            padding: .8rem 1.4rem;
+            border-radius: 10px;
+            font-size: .88rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all .2s;
+            border: 1.5px solid var(--border);
+            color: var(--text2);
+        }
+
+        .contact-link:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .contact-link .icon {
+            font-size: 1.1rem;
+        }
+
+        .contact-cta-main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .7rem;
+            margin-top: 2rem;
+            padding: 1rem 2.5rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all .2s;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-cta-main:hover {
+            background: #0d9488;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(20, 184, 166, .3);
+        }
+
+        .contact-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .contact-divider::before,
+        .contact-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .contact-divider span {
+            font-size: .8rem;
+            color: var(--muted);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: .82rem;
+        }
+
+        footer span {
+            color: var(--primary);
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .7);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            max-width: 780px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 2.5rem;
+            position: relative;
+            animation: modalIn .25s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                transform: scale(.95);
+                opacity: 0
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            background: var(--bg3);
+            border: none;
+            color: var(--text2);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            color: var(--text);
+        }
+
+        .modal h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .modal-section {
+            margin-top: 1.75rem;
+        }
+
+        .modal-section h3 {
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: .75rem;
+        }
+
+        .modal-section p {
+            font-size: .9rem;
+            color: var(--text2);
+            line-height: 1.8;
+        }
+
+        /* BLOG DETAIL */
+        .blog-detail-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 200;
+            overflow-y: auto;
+        }
+
+        .blog-detail-overlay.open {
+            display: block;
+        }
+
+        .blog-detail-inner {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+        }
+
+        .blog-back {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: .88rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            margin-bottom: 2rem;
+        }
+
+        .blog-detail-title {
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1.25;
+            margin-bottom: 1rem;
+        }
+
+        .blog-detail-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .blog-detail-meta span {
+            font-size: .82rem;
+            color: var(--muted);
+        }
+
+        .blog-content h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 2.5rem 0 1rem;
+        }
+
+        .blog-content h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 2rem 0 .75rem;
+        }
+
+        .blog-content p {
+            color: var(--text2);
+            line-height: 1.9;
+            margin-bottom: 1.25rem;
+            font-size: .95rem;
+        }
+
+        .blog-content ul,
+        .blog-content ol {
+            color: var(--text2);
+            line-height: 1.9;
+            padding-left: 1.5rem;
+            margin-bottom: 1.25rem;
+            font-size: .95rem;
+        }
+
+        .blog-content li {
+            margin-bottom: .35rem;
+        }
+
+        .blog-content code {
+            background: var(--bg2);
+            color: var(--primary);
+            padding: .2em .45em;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: .85em;
+        }
+
+        .blog-content pre {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .blog-content pre code {
+            background: none;
+            padding: 0;
+            color: var(--text2);
+            font-size: .85rem;
+        }
+
+        .blog-content blockquote {
+            border-left: 3px solid var(--primary);
+            padding-left: 1rem;
+            color: var(--muted);
+            font-style: italic;
+            margin: 1.5rem 0;
+        }
+
+        /* ANIMATIONS */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .6s ease, transform .6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width: 900px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .hero-canvas {
+                max-width: 320px;
+            }
+
+            .about-grid,
+            .project-card-main {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .exp-item {
+                grid-template-columns: 1fr;
+                gap: .5rem;
+            }
+
+            .exp-item::before {
+                display: none;
+            }
+
+            .exp-left {
+                text-align: left;
+                padding-right: 0;
+            }
+
+            .exp-right {
+                padding-left: 1.5rem;
+            }
+
+            #about,
+            #experience,
+            #contact {
+                margin: 0 0 2rem;
+                border-radius: 16px;
+                padding: 3rem 1.5rem;
+            }
+
+            .projects-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+
+        @media(max-width: 640px) {
+            nav {
+                padding: 0 1.25rem;
+            }
+
+            .nav-links,
+            .nav-right .theme-btn {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            section {
+                padding: 4rem 1.25rem;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+
+            .about-info {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+
+        /* PROGRESS BAR */
+        .scroll-progress {
+            position: fixed;
+            top: 64px;
+            left: 0;
+            height: 2px;
+            background: var(--primary);
+            z-index: 101;
+            transition: width .1s;
+        }
+
+        /* ACTIVE NAV */
+        .nav-links a.active {
+            color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Scroll progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- NAV -->
+    <nav id="mainNav">
+        <a href="#" class="nav-logo">pvt.dev</a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="theme-btn" id="themeBtn" title="Toggle theme">🌙</button>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#about" onclick="closeMobile()">About</a>
+        <a href="#skills" onclick="closeMobile()">Skills</a>
+        <a href="#projects" onclick="closeMobile()">Projects</a>
+        <a href="#experience" onclick="closeMobile()">Experience</a>
+        <a href="#blog" onclick="closeMobile()">Blog</a>
+        <a href="#contact" onclick="closeMobile()">Contact</a>
+    </div>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-inner fade-in">
+            <div class="hero-left">
+                <div class="hero-badge">Available for opportunities</div>
+                <h1 class="hero-title">
+                    Hi, I'm
+                    <span class="name">Pham Van Tien</span>
+                    <span class="role">Front-end Developer</span>
+                </h1>
+                <p class="hero-desc">
+                    I build clean, responsive, and practical web applications with ReactJS, REST APIs, and modern UI
+                    frameworks. Passionate about turning ideas into real-world products.
+                </p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn-primary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <path d="M3 6h18M3 12h18M3 18h18" />
+                        </svg>
+                        View Projects
+                    </a>
+                    <a href="#contact" class="btn-outline">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                        </svg>
+                        Contact Me
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div>
+                        <div class="stat-num">4+</div>
+                        <div class="stat-label">Projects Built</div>
+                    </div>
+                    <div>
+                        <div class="stat-num">3</div>
+                        <div class="stat-label">Internships</div>
+                    </div>
+                    <div>
+                        <div class="stat-num">3.3</div>
+                        <div class="stat-label">GPA / 4.0</div>
+                    </div>
+                    <div>
+                        <div class="stat-num">B1</div>
+                        <div class="stat-label">English</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="hero-canvas">
+                    <div class="code-card">
+                        <div class="code-bar">
+                            <div class="code-dot c-red"></div>
+                            <div class="code-dot c-yellow"></div>
+                            <div class="code-dot c-green"></div>
+                        </div>
+                        <div style="display:flex;flex-direction:column;gap:.3rem">
+                            <div class="code-line"><span class="ln">1</span><span><span class="kw">const</span> <span
+                                        class="fn">Developer</span> = () => {</span></div>
+                            <div class="code-line"><span class="ln">2</span><span>&nbsp;&nbsp;<span
+                                        class="kw">return</span> {</span></div>
+                            <div class="code-line"><span class="ln">3</span><span>&nbsp;&nbsp;&nbsp;&nbsp;name: <span
+                                        class="st">"Pham Van Tien"</span>,</span></div>
+                            <div class="code-line"><span class="ln">4</span><span>&nbsp;&nbsp;&nbsp;&nbsp;role: <span
+                                        class="st">"Frontend Dev"</span>,</span></div>
+                            <div class="code-line"><span class="ln">5</span><span>&nbsp;&nbsp;&nbsp;&nbsp;stack: [<span
+                                        class="st">"React"</span>, <span class="st">"Nest"</span>],</span></div>
+                            <div class="code-line"><span class="ln">6</span><span>&nbsp;&nbsp;&nbsp;&nbsp;location:
+                                    <span class="st">"Da Nang 🇻🇳"</span>,</span></div>
+                            <div class="code-line"><span class="ln">7</span><span>&nbsp;&nbsp;&nbsp;&nbsp;available:
+                                    <span class="kw">true</span></span></div>
+                            <div class="code-line"><span class="ln">8</span><span>&nbsp;&nbsp;}</span></div>
+                            <div class="code-line"><span class="ln">9</span><span>}</span></div>
+                            <div class="code-line" style="margin-top:.5rem"><span class="ln">10</span><span
+                                    class="cm">// Let's build something great!</span></div>
+                        </div>
+                    </div>
+
+                    <div class="floating-badge b1">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#14B8A6" stroke-width="2.5">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        ReactJS + NestJS
+                    </div>
+                    <div class="floating-badge b2">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2.5">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
+                        Available Now
+                    </div>
+                    <div class="floating-badge b3">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2.5">
+                            <path
+                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+                        </svg>
+                        GitHub Active
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about"
+        style="padding:5rem 3rem;margin:0 1rem 2rem;background:var(--bg2);border-radius:24px;max-width:1200px;margin-left:auto;margin-right:auto;">
+        <div class="fade-in">
+            <div class="section-tag">About Me</div>
+            <h2 class="section-title">Building with purpose,<br><span>learning with passion</span></h2>
+        </div>
+        <div class="about-grid fade-in">
+            <div class="about-text">
+                <p>I'm a Software Technology student at <strong style="color:var(--text)">Dong A University</strong>, Da
+                    Nang, Vietnam — graduating and aiming to grow as a professional Front-end / Full-stack Developer.
+                </p>
+                <p>I have practical experience through internships and real-world projects, including a medical
+                    appointment booking system, a GIS-based fire hydrant management system, and e-commerce platforms. I
+                    enjoy building systems that solve real problems.</p>
+                <p>I'm comfortable across the full stack — from crafting polished, responsive React UIs to integrating
+                    REST APIs with NestJS, deploying with AWS EC2 and Docker, and setting up CI/CD pipelines.</p>
+                <div class="about-info">
+                    <div class="info-item">
+                        <div class="info-label">Location</div>
+                        <div class="info-val">Da Nang, Vietnam</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">University</div>
+                        <div class="info-val">Dong A University</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Major</div>
+                        <div class="info-val">Software Technology</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">GPA</div>
+                        <div class="info-val">3.3 / 4.0</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">English</div>
+                        <div class="info-val">B1 Certificate</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Status</div>
+                        <div class="info-val" style="color:var(--primary)">● Open to Work</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="about-highlight">
+                    <div class="highlight-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)"
+                            stroke-width="2.5">
+                            <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                            <polyline points="22 4 12 14.01 9 11.01" />
+                        </svg>
+                        Experience Highlights
+                    </div>
+                    <div class="timeline-mini">
+                        <div class="tm-item">
+                            <div class="tm-dot"></div>
+                            <div class="tm-content">
+                                <div class="tm-title">Team Leader — Medical Booking System</div>
+                                <div class="tm-sub">ReactJS + NestJS + MySQL + AWS EC2 + CI/CD</div>
+                            </div>
+                        </div>
+                        <div class="tm-item">
+                            <div class="tm-dot"></div>
+                            <div class="tm-content">
+                                <div class="tm-title">Developer — GIS Fire Hydrant Management</div>
+                                <div class="tm-sub">ReactJS + Leaflet + REST API + GIS</div>
+                            </div>
+                        </div>
+                        <div class="tm-item">
+                            <div class="tm-dot"></div>
+                            <div class="tm-content">
+                                <div class="tm-title">Intern — Zalo Mini App (AutomationLand)</div>
+                                <div class="tm-sub">Real estate transactions on Zalo platform</div>
+                            </div>
+                        </div>
+                        <div class="tm-item">
+                            <div class="tm-dot"></div>
+                            <div class="tm-content">
+                                <div class="tm-title">Intern — Mobile App QA (JOBVN24)</div>
+                                <div class="tm-sub">SRS documentation, test cases, bug tracking</div>
+                            </div>
+                        </div>
+                        <div class="tm-item">
+                            <div class="tm-dot"></div>
+                            <div class="tm-content">
+                                <div class="tm-title">Intern — QA / Production (Wistron)</div>
+                                <div class="tm-sub">Quality control, issue tracking, pre-shipment checks</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+        <div class="fade-in">
+            <div class="section-tag">Tech Stack</div>
+            <h2 class="section-title">Skills & <span>Technologies</span></h2>
+            <p class="section-sub">Tools and technologies I work with — from crafting UIs to shipping and deploying
+                full-stack applications.</p>
+        </div>
+        <div class="skills-grid fade-in">
+            <div class="skill-card">
+                <div class="skill-card-header">
+                    <div class="skill-icon">⚛️</div>
+                    <div class="skill-card-title">Frontend</div>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">ReactJS</span>
+                    <span class="skill-tag">JavaScript ES6+</span>
+                    <span class="skill-tag">HTML5</span>
+                    <span class="skill-tag">CSS3</span>
+                    <span class="skill-tag">TailwindCSS</span>
+                    <span class="skill-tag">Bootstrap</span>
+                    <span class="skill-tag">Redux</span>
+                    <span class="skill-tag">Responsive UI</span>
+                    <span class="skill-tag">Framer Motion</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-card-header">
+                    <div class="skill-icon">🖥️</div>
+                    <div class="skill-card-title">Backend & Database</div>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">NodeJS</span>
+                    <span class="skill-tag">NestJS</span>
+                    <span class="skill-tag">REST API</span>
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">MongoDB</span>
+                    <span class="skill-tag">Django</span>
+                    <span class="skill-tag">SQLite</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-card-header">
+                    <div class="skill-icon">🛠️</div>
+                    <div class="skill-card-title">DevOps & Tools</div>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">GitHub</span>
+                    <span class="skill-tag">Postman</span>
+                    <span class="skill-tag">Vercel</span>
+                    <span class="skill-tag">AWS EC2</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">CI/CD</span>
+                    <span class="skill-tag">Vite</span>
+                    <span class="skill-tag">npm</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-card-header">
+                    <div class="skill-icon">🗺️</div>
+                    <div class="skill-card-title">Specialized</div>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">GIS / Leaflet</span>
+                    <span class="skill-tag">Zalo Mini App</span>
+                    <span class="skill-tag">MDX / Markdown</span>
+                    <span class="skill-tag">SRS Documentation</span>
+                    <span class="skill-tag">Test Case Writing</span>
+                    <span class="skill-tag">Agile / Scrum</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+        <div class="projects-header fade-in">
+            <div>
+                <div class="section-tag">Work</div>
+                <h2 class="section-title">Featured <span>Projects</span></h2>
+            </div>
+            <a href="https://github.com/Pvt25072004" target="_blank" rel="noopener" class="view-all">
+                View all on GitHub
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+            </a>
+        </div>
+
+        <!-- FEATURED PROJECT -->
+        <div class="projects-featured fade-in">
+            <div class="project-card-main">
+                <div>
+                    <div class="project-badge">
+                        <span class="badge badge-team">Team Project</span>
+                        <span class="badge badge-leader">Team Leader</span>
+                    </div>
+                    <h3 class="project-title">Schedule a Medical Examination</h3>
+                    <p class="project-desc">A full-stack medical appointment booking system that digitalizes the
+                        traditional clinic booking workflow — allowing patients to search doctors, view schedules, and
+                        book online.</p>
+                    <div class="project-stack">
+                        <span class="stack-tag">ReactJS</span>
+                        <span class="stack-tag">NestJS</span>
+                        <span class="stack-tag">MySQL</span>
+                        <span class="stack-tag">TailwindCSS</span>
+                        <span class="stack-tag">AWS EC2</span>
+                        <span class="stack-tag">CI/CD</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Pvt25072004/Schedule-a-medical-examination" target="_blank"
+                            rel="noopener" class="proj-link github">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+                            </svg>
+                            GitHub
+                        </a>
+                        <button class="proj-link demo" onclick="openCaseStudy('medical')">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" />
+                                <path d="M3 9h18M9 21V9" />
+                            </svg>
+                            Case Study
+                        </button>
+                    </div>
+                </div>
+                <div class="project-right">
+                    <div class="proj-detail-box">
+                        <div class="proj-detail-label">🔍 Problem</div>
+                        <div class="proj-detail-val">Manual appointment booking is inconvenient for patients and
+                            difficult for clinics to manage across doctors, schedules, and appointment records.</div>
+                    </div>
+                    <div class="proj-detail-box">
+                        <div class="proj-detail-label">✅ Features</div>
+                        <div class="feature-list">
+                            <div class="feature-item">Doctor search</div>
+                            <div class="feature-item">Specialty filtering</div>
+                            <div class="feature-item">Appointment booking</div>
+                            <div class="feature-item">Patient management</div>
+                            <div class="feature-item">Admin dashboard</div>
+                            <div class="feature-item">Auth system</div>
+                            <div class="feature-item">Schedule management</div>
+                            <div class="feature-item">REST API</div>
+                        </div>
+                    </div>
+                    <div class="proj-detail-box">
+                        <div class="proj-detail-label">🧑‍💻 My Role</div>
+                        <div class="proj-detail-val">Team Leader — collaborated with 2 developers. Frontend development,
+                            API integration, deployment support, task allocation, and feature review.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROJECT GRID -->
+        <div class="projects-grid fade-in">
+
+            <div class="project-card-sm">
+                <div class="project-badge">
+                    <span class="badge badge-team">Team Project</span>
+                    <span class="badge badge-leader">Team Leader</span>
+                </div>
+                <h3 class="project-title">🗺️ Fire Hydrant GIS Management</h3>
+                <p class="project-desc" style="font-size:.85rem;color:var(--text2);line-height:1.7;margin-bottom:1rem;">
+                    GIS-based system for managing and visualizing fire hydrant locations across Da Nang city — with map
+                    display, filtering, and emergency planning support.</p>
+                <div class="project-stack" style="margin-bottom:1.25rem;">
+                    <span class="stack-tag">ReactJS</span>
+                    <span class="stack-tag">Leaflet</span>
+                    <span class="stack-tag">REST API</span>
+                    <span class="stack-tag">GIS</span>
+                </div>
+                <div class="feature-list" style="margin-bottom:1.25rem;">
+                    <div class="feature-item">Map display</div>
+                    <div class="feature-item">Hydrant markers</div>
+                    <div class="feature-item">Area filtering</div>
+                    <div class="feature-item">Detail popup</div>
+                    <div class="feature-item">Add/Update data</div>
+                    <div class="feature-item">Search</div>
+                </div>
+                <div class="project-links">
+                    <button class="proj-link demo" onclick="openCaseStudy('gis')"
+                        style="font-size:.8rem;padding:.5rem .9rem;">View Case Study</button>
+                </div>
+            </div>
+
+            <div class="project-card-sm">
+                <div class="project-badge">
+                    <span class="badge badge-team">Team Project</span>
+                    <span class="badge badge-leader">Team Leader</span>
+                </div>
+                <h3 class="project-title">💎 Jewelry Shop</h3>
+                <p class="project-desc" style="font-size:.85rem;color:var(--text2);line-height:1.7;margin-bottom:1rem;">
+                    An e-commerce website for jewelry with full product listing, shopping flow, Redux state management,
+                    and responsive UI.</p>
+                <div class="project-stack" style="margin-bottom:1.25rem;">
+                    <span class="stack-tag">ReactJS</span>
+                    <span class="stack-tag">Redux</span>
+                    <span class="stack-tag">JavaScript</span>
+                    <span class="stack-tag">Bootstrap</span>
+                </div>
+                <div class="feature-list" style="margin-bottom:1.25rem;">
+                    <div class="feature-item">Product listing</div>
+                    <div class="feature-item">Product detail</div>
+                    <div class="feature-item">Shopping cart</div>
+                    <div class="feature-item">Redux state</div>
+                    <div class="feature-item">Responsive UI</div>
+                    <div class="feature-item">3 collaborators</div>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/Pvt25072004/jewery-byvantien" target="_blank" rel="noopener"
+                        class="proj-link github" style="font-size:.8rem;padding:.5rem .9rem;">GitHub</a>
+                </div>
+            </div>
+
+            <div class="project-card-sm">
+                <div class="project-badge">
+                    <span class="badge badge-team">Team Project</span>
+                </div>
+                <h3 class="project-title">📚 BookShop</h3>
+                <p class="project-desc" style="font-size:.85rem;color:var(--text2);line-height:1.7;margin-bottom:1rem;">
+                    A full-stack bookstore website with user registration, product search, and payment flow. Built with
+                    Django backend and responsive frontend.</p>
+                <div class="project-stack" style="margin-bottom:1.25rem;">
+                    <span class="stack-tag">HTML/CSS</span>
+                    <span class="stack-tag">JavaScript</span>
+                    <span class="stack-tag">Bootstrap</span>
+                    <span class="stack-tag">Django</span>
+                    <span class="stack-tag">SQLite</span>
+                </div>
+                <div class="feature-list" style="margin-bottom:1.25rem;">
+                    <div class="feature-item">User registration</div>
+                    <div class="feature-item">Product listing</div>
+                    <div class="feature-item">Product search</div>
+                    <div class="feature-item">Payment flow</div>
+                    <div class="feature-item">Admin panel</div>
+                    <div class="feature-item">Responsive</div>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/Pvt25072004/Bookshop" target="_blank" rel="noopener"
+                        class="proj-link github" style="font-size:.8rem;padding:.5rem .9rem;">GitHub</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience"
+        style="padding:5rem 3rem;margin:0 auto 2rem;background:var(--bg2);border-radius:24px;max-width:1200px;">
+        <div class="fade-in">
+            <div class="section-tag">Career</div>
+            <h2 class="section-title">Work <span>Experience</span></h2>
+            <p class="section-sub">Internship experience across frontend development, QA testing, and product research.
+            </p>
+        </div>
+        <div class="exp-timeline fade-in">
+            <div class="exp-item">
+                <div class="exp-left">
+                    <div class="exp-date">06/2025 — 08/2025</div>
+                    <div class="exp-company">JOBVN24 CO., LTD</div>
+                    <div class="exp-type">Internship · Da Nang</div>
+                </div>
+                <div class="exp-right">
+                    <div class="exp-role">QA Intern — Mobile Application</div>
+                    <div class="exp-desc">Tested core features and user flows of a mobile application. Wrote SRS
+                        documentation and test cases. Worked with the development team to reproduce bugs, verify fixes,
+                        and improve product quality through structured QA workflows.</div>
+                </div>
+            </div>
+            <div class="exp-item">
+                <div class="exp-left">
+                    <div class="exp-date">11/2025 — 01/2026</div>
+                    <div class="exp-company">AUTOMATIONLAND</div>
+                    <div class="exp-type">Internship · Da Nang</div>
+                </div>
+                <div class="exp-right">
+                    <div class="exp-role">Frontend Intern — Zalo Mini App</div>
+                    <div class="exp-desc">Researched and developed a Zalo Mini App for a real estate transaction use
+                        case. Built UI screens, integrated platform APIs, and supported deployment and testing of core
+                        application flows on the Zalo platform.</div>
+                </div>
+            </div>
+            <div class="exp-item">
+                <div class="exp-left">
+                    <div class="exp-date">01/2026 — 04/2026</div>
+                    <div class="exp-company">WISTRON INFOCOMM</div>
+                    <div class="exp-type">Internship · Da Nang</div>
+                </div>
+                <div class="exp-right">
+                    <div class="exp-role">QA / Production Intern</div>
+                    <div class="exp-desc">Performed product functionality checks and recorded test results before
+                        shipment. Learned QA workflow, issue tracking, and quality control processes in a professional
+                        manufacturing and production environment.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOG -->
+    <section id="blog">
+        <div class="fade-in">
+            <div class="section-tag">Writing</div>
+            <h2 class="section-title">Technical <span>Blog</span></h2>
+            <p class="section-sub">Notes, case studies, and lessons from building real projects. Written for developers
+                by a developer.</p>
+        </div>
+        <div class="blog-grid fade-in" id="blogGrid"></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact"
+        style="padding:5rem 3rem;margin:0 auto 4rem;background:var(--bg2);border-radius:24px;max-width:1200px;text-align:center;">
+        <div class="contact-inner fade-in">
+            <div class="section-tag" style="display:inline-block">Get In Touch</div>
+            <h2 class="section-title" style="margin-top:.5rem">Let's Work <span>Together</span></h2>
+            <p class="section-sub" style="margin:1rem auto 0">I'm currently open to new opportunities — whether it's a
+                full-time role, freelance project, or just a good technical conversation.</p>
+
+            <a href="mailto:pvt25072004@gmail.com" class="contact-cta-main">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <polyline points="22,6 12,13 2,6" />
+                </svg>
+                Send Me An Email
+            </a>
+
+            <div class="contact-divider"><span>or connect on</span></div>
+
+            <div class="contact-links">
+                <a href="https://github.com/Pvt25072004" target="_blank" rel="noopener" class="contact-link">
+                    <span class="icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+                        </svg>
+                    </span>
+                    GitHub
+                </a>
+                <a href="#" class="contact-link">
+                    <span class="icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
+                            <rect x="2" y="9" width="4" height="12" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg>
+                    </span>
+                    LinkedIn
+                </a>
+                <a href="tel:+84000000000" class="contact-link">
+                    <span class="icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .07h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                        </svg>
+                    </span>
+                    Phone
+                </a>
+                <div class="contact-link" style="cursor:default;">
+                    <span class="icon">📍</span>
+                    Da Nang, Vietnam
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Designed & Built by <span>Pham Van Tien</span> · Front-end Developer Fresher · Da Nang, Vietnam</p>
+        <p style="margin-top:.5rem;font-size:.75rem;">© 2026 pvt.dev — ReactJS · TailwindCSS · Vite</p>
+    </footer>
+
+    <!-- CASE STUDY MODAL -->
+    <div class="modal-overlay" id="caseStudyModal" onclick="if(event.target===this)closeCaseStudy()">
+        <div class="modal" id="caseStudyContent">
+            <button class="modal-close" onclick="closeCaseStudy()">✕</button>
+            <div id="caseStudyInner"></div>
+        </div>
+    </div>
+
+    <!-- BLOG DETAIL OVERLAY -->
+    <div class="blog-detail-overlay" id="blogDetailOverlay">
+        <div class="blog-detail-inner">
+            <button class="blog-back" onclick="closeBlogDetail()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M19 12H5M12 5l-7 7 7 7" />
+                </svg>
+                Back to Blog
+            </button>
+            <div id="blogDetailContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // ─── DATA ────────────────────────────────────────────────────────────────────
+
+        const blogs = [
+            {
+                slug: "medical-booking-system",
+                title: "How I built a medical appointment booking system with ReactJS and NestJS",
+                description: "A deep dive into the architecture, challenges, and lessons from building a real-world clinic booking platform as team leader.",
+                date: "Jan 15, 2026",
+                readTime: "8 min read",
+                tags: ["ReactJS", "NestJS", "Case Study"],
+                content: `
+      <h2>Overview</h2>
+      <p>The <strong>Schedule a Medical Examination</strong> project is a full-stack web application that lets patients search for doctors, view available schedules, and book appointments — all online. This was my most complex project to date, and I led a team of 3 developers.</p>
+      <h2>The Problem</h2>
+      <p>In many Vietnamese clinics, appointments are still handled manually — patients call or show up in person, staff write things down, and scheduling is prone to errors. We wanted to build a system that digitalized this entire workflow.</p>
+      <h2>Architecture</h2>
+      <p>We split the system into three portals:</p>
+      <ul>
+        <li><strong>Patient portal:</strong> search doctors, book appointments, view history</li>
+        <li><strong>Doctor portal:</strong> manage schedules, view upcoming appointments</li>
+        <li><strong>Admin portal:</strong> manage all doctors, patients, and system data</li>
+      </ul>
+      <h2>Tech Stack</h2>
+      <ul>
+        <li><strong>Frontend:</strong> ReactJS + TailwindCSS — I chose React for component reusability across portals</li>
+        <li><strong>Backend:</strong> NestJS — clean module architecture made it easy to separate concerns</li>
+        <li><strong>Database:</strong> MySQL — relational structure was ideal for the appointment/doctor/patient relationships</li>
+        <li><strong>Deployment:</strong> AWS EC2 + CI/CD pipeline</li>
+      </ul>
+      <h2>Main Challenges</h2>
+      <h3>1. Schedule conflict detection</h3>
+      <p>A doctor can only see one patient per time slot. We built a conflict-check query that verifies availability before confirming a booking. This required careful SQL join logic across the schedule, appointment, and doctor tables.</p>
+      <h3>2. Role-based auth</h3>
+      <p>Three different portals with different permissions. We implemented JWT-based auth with role guards in NestJS (<code>@Roles()</code> decorator), which kept the backend logic clean.</p>
+      <h3>3. Team coordination</h3>
+      <p>Working with 2 other developers meant we needed a clear Git branching strategy. We used feature branches with pull requests and review before merging to main.</p>
+      <h2>What I Learned</h2>
+      <ul>
+        <li>How to design a relational DB schema for a booking workflow</li>
+        <li>How to set up CI/CD to auto-deploy on push to main</li>
+        <li>How to lead a team — task breakdown, code review, communication</li>
+        <li>The importance of API contracts (agreeing on request/response shapes before coding)</li>
+      </ul>
+      <h2>Result</h2>
+      <p>The system successfully moved the clinic's appointment flow from manual to digital. Patients can book in under 2 minutes. The admin dashboard gives clinic staff full visibility over schedules and patient data.</p>
+      <blockquote>Building this taught me more in 8 months than anything else I've studied. Real problems force real solutions.</blockquote>
+    `
+            },
+            {
+                slug: "rest-api-react",
+                title: "How I integrated REST APIs in a React project — what I learned the hard way",
+                description: "My practical notes on fetching data, handling loading states, errors, and structuring API calls cleanly in React.",
+                date: "Feb 2, 2026",
+                readTime: "5 min read",
+                tags: ["ReactJS", "REST API", "Frontend"],
+                content: `
+      <h2>The Problem with Naive API Calls</h2>
+      <p>When I first started with React, I put <code>fetch()</code> calls directly inside my components. It worked — until it didn't. State management got messy, error handling was inconsistent, and the same API calls were duplicated everywhere.</p>
+      <h2>What I Changed</h2>
+      <h3>1. Centralize API calls in a services layer</h3>
+      <p>I moved all API calls into a <code>src/services/</code> folder. Each file corresponds to a resource — <code>appointmentService.js</code>, <code>doctorService.js</code>, etc. This made mocking and testing much easier.</p>
+      <pre><code>// services/doctorService.js
+const API = import.meta.env.VITE_API_URL;
+
+export const getDoctors = async (specialty) => {
+  const res = await fetch(\`\${API}/doctors?specialty=\${specialty}\`);
+  if (!res.ok) throw new Error('Failed to fetch doctors');
+  return res.json();
+};</code></pre>
+      <h3>2. Use a custom hook for async state</h3>
+      <p>I built a simple <code>useAsync</code> hook that handles loading, error, and data state in one place. No more duplicating that pattern in every component.</p>
+      <h3>3. Handle errors at the boundary</h3>
+      <p>I learned to differentiate between network errors (no response), API errors (4xx/5xx), and validation errors. Each needs a different UX treatment — a toast for 500s, an inline message for 422 validation failures.</p>
+      <h2>Key Takeaways</h2>
+      <ul>
+        <li>Always check <code>res.ok</code> before calling <code>res.json()</code></li>
+        <li>Use an Axios instance with interceptors for auth tokens — it saves a lot of repetition</li>
+        <li>Show the user something useful on error — not just "Something went wrong"</li>
+        <li>Abort fetch calls on component unmount to avoid state updates on unmounted components</li>
+      </ul>
+    `
+            },
+            {
+                slug: "deploy-react-vercel",
+                title: "How to deploy a React + Vite project to Vercel in under 5 minutes",
+                description: "A step-by-step guide from local dev to live production URL, with tips on environment variables and custom domains.",
+                date: "Feb 20, 2026",
+                readTime: "4 min read",
+                tags: ["Deployment", "Vercel", "Vite"],
+                content: `
+      <h2>Why Vercel?</h2>
+      <p>Vercel is the fastest way to get a React project live. It connects directly to your GitHub repo, detects Vite automatically, and deploys on every push to main. For a portfolio or personal project, it's essentially free.</p>
+      <h2>Step-by-Step</h2>
+      <h3>Step 1: Prepare your project</h3>
+      <p>Make sure your <code>vite.config.js</code> is correct and <code>npm run build</code> runs without errors locally. The build output goes to the <code>dist/</code> folder.</p>
+      <h3>Step 2: Push to GitHub</h3>
+      <pre><code>git init
+git add .
+git commit -m "initial commit"
+git remote add origin https://github.com/yourusername/your-repo.git
+git push -u origin main</code></pre>
+      <h3>Step 3: Import to Vercel</h3>
+      <p>Go to <strong>vercel.com</strong>, click "Add New Project", and import your GitHub repo. Vercel auto-detects Vite and sets the correct build command and output directory.</p>
+      <h3>Step 4: Environment Variables</h3>
+      <p>If you use <code>import.meta.env.VITE_*</code> variables, add them in the Vercel dashboard under Project Settings → Environment Variables. Never commit <code>.env</code> files to git.</p>
+      <h3>Step 5: Custom Domain (optional)</h3>
+      <p>In Project Settings → Domains, add your custom domain and follow the DNS instructions. Vercel handles SSL automatically.</p>
+      <h2>Pro Tips</h2>
+      <ul>
+        <li>Use preview deployments — every PR gets its own URL for testing</li>
+        <li>Check the build logs on Vercel if something breaks in production but works locally</li>
+        <li>Add a <code>vercel.json</code> to configure redirects for SPA routing (important for React Router)</li>
+      </ul>
+      <pre><code>// vercel.json
+{
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}</code></pre>
+    `
+            },
+            {
+                slug: "gis-leaflet-react",
+                title: "What I learned building a GIS fire hydrant management system",
+                description: "Lessons from integrating Leaflet maps, GIS data, and spatial filtering into a React application for real city infrastructure.",
+                date: "Mar 5, 2026",
+                readTime: "6 min read",
+                tags: ["ReactJS", "GIS", "Leaflet"],
+                content: `
+      <h2>Context</h2>
+      <p>The <strong>Fire Hydrant GIS Management</strong> project was built for Da Nang city to help fire departments visualize and manage hydrant locations on a map. It was my first time working with GIS data and map libraries.</p>
+      <h2>Why Leaflet?</h2>
+      <p>Leaflet is lightweight, open-source, and has great documentation. For a government/city project, it was also a safer choice than paid map services. The <code>react-leaflet</code> wrapper made it easy to integrate with our existing React codebase.</p>
+      <h2>Key Technical Challenges</h2>
+      <h3>1. Rendering hundreds of markers efficiently</h3>
+      <p>Rendering 500+ hydrant markers on a map caused significant lag. The solution was <strong>marker clustering</strong> with <code>leaflet.markercluster</code> — nearby markers group together when zoomed out, dramatically improving performance.</p>
+      <h3>2. Filtering by area, status, and type</h3>
+      <p>We needed to filter hydrants spatially (by district) and by attributes (working/damaged, type). We used bounding box checks for spatial filtering and standard array <code>.filter()</code> for attribute filtering, with the filtered set passed to the map component.</p>
+      <h3>3. Custom popup design</h3>
+      <p>Leaflet's default popups are plain HTML. We used <code>ReactDOM.render()</code> inside a Leaflet popup container to render full React components with styled data, images, and action buttons.</p>
+      <h2>What I Learned</h2>
+      <ul>
+        <li>GIS data comes in formats like GeoJSON — understanding the coordinate system (lat/lng) is fundamental</li>
+        <li>Map performance requires careful thought about how many DOM elements you render</li>
+        <li>Spatial problems are a different mental model — thinking in coordinates and bounding boxes</li>
+        <li>Government/infrastructure projects have strict requirements around data accuracy and access control</li>
+      </ul>
+    `
+            },
+            {
+                slug: "git-conflicts",
+                title: "Common Git conflicts I hit as a team lead — and how I fixed them",
+                description: "Real-world Git conflict scenarios from leading a 3-person dev team, with concrete resolution strategies.",
+                date: "Mar 18, 2026",
+                readTime: "5 min read",
+                tags: ["Git", "Teamwork", "DevOps"],
+                content: `
+      <h2>Leading a Team Means Owning Git Conflicts</h2>
+      <p>When I became team leader on the medical booking project, I underestimated how much time we'd spend resolving Git conflicts. Here's what I learned.</p>
+      <h2>Scenario 1: Two devs editing the same component</h2>
+      <p>Both devs modified <code>AppointmentCard.jsx</code> in separate branches. When we merged, Git flagged conflicts in the JSX.</p>
+      <p><strong>Fix:</strong> We talked through the changes together, kept both sets of changes by merging the JSX carefully, and agreed to assign component ownership going forward — one person "owns" each file.</p>
+      <h2>Scenario 2: package-lock.json conflicts</h2>
+      <p>Two devs installed different packages, causing <code>package-lock.json</code> conflicts. These are almost impossible to merge manually.</p>
+      <p><strong>Fix:</strong> Accept one version, delete <code>node_modules</code> and <code>package-lock.json</code>, then run <code>npm install</code> fresh. Both changes get included from <code>package.json</code>.</p>
+      <h2>Scenario 3: Long-running feature branch diverged too far</h2>
+      <p>A feature branch that hadn't been synced with main for 2 weeks had hundreds of conflicts when we tried to merge.</p>
+      <p><strong>Fix:</strong> Rebase instead of merge. <code>git rebase main</code> replays commits one at a time, making conflicts smaller and easier to resolve incrementally. We also made a rule: sync with main every day.</p>
+      <h2>Team Git Rules We Adopted</h2>
+      <ul>
+        <li>One feature = one branch, merged within 2-3 days max</li>
+        <li><code>git pull --rebase origin main</code> every morning before starting work</li>
+        <li>Small, focused commits — easier to revert and review</li>
+        <li>Never force-push to main</li>
+        <li>Mandatory PR review before merging</li>
+      </ul>
+    `
+            }
+        ];
+
+        const caseStudies = {
+            medical: {
+                title: "Schedule a Medical Examination — Case Study",
+                badges: ['Team Project', 'Team Leader', '10/2025 – 06/2026'],
+                overview: "A full-stack medical appointment booking system built with ReactJS, NestJS, MySQL, TailwindCSS, AWS EC2, and CI/CD. Led a team of 3 developers from requirements to production deployment.",
+                problem: "Manual appointment booking is inconvenient for patients and impossible to scale for clinics managing multiple doctors, specialties, and daily schedules. There was no centralized system.",
+                solution: "Built three portals — Patient (search, book, view history), Doctor (manage schedule, view appointments), and Admin (full management dashboard). Deployed to AWS EC2 with a CI/CD pipeline for continuous delivery.",
+                stack: ["ReactJS", "NestJS", "MySQL", "TailwindCSS", "AWS EC2", "CI/CD", "JWT Auth"],
+                features: ["Doctor search by name/specialty", "Real-time schedule availability", "Appointment booking & cancellation", "Patient portal with history", "Doctor portal with schedule management", "Admin dashboard — full CRUD", "Role-based authentication (JWT)", "REST API with NestJS controllers/services", "Deployment with CI/CD pipeline"],
+                role: "Team Leader — defined the system architecture, assigned tasks to 2 developers, reviewed all PRs, handled frontend development personally, supported API integration and deployment.",
+                challenges: "Building a conflict-free scheduling system (a doctor can only have one patient per time slot) required careful SQL joins. Setting up the CI/CD pipeline and AWS EC2 environment was new territory for the team.",
+                learned: "System design for real workflows, Git team management, CI/CD setup, NestJS module architecture, and the importance of agreeing on API contracts before coding.",
+                github: "https://github.com/Pvt25072004/Schedule-a-medical-examination"
+            },
+            gis: {
+                title: "Fire Hydrant GIS Management — Case Study",
+                badges: ['Team Project', 'Team Leader', '2025'],
+                overview: "A GIS-based web application for managing and visualizing fire hydrant locations across Da Nang city. Enables spatial filtering, map-based visualization, and maintenance tracking.",
+                problem: "Fire hydrant data was stored in spreadsheets with no spatial visualization. Fire departments couldn't quickly identify hydrant locations, status, or coverage gaps during emergencies.",
+                solution: "Built a map-based management system using Leaflet.js for spatial visualization, with filtering by area, status, and type. Added popups with full hydrant details, image support, and CRUD operations.",
+                stack: ["ReactJS", "Leaflet.js", "react-leaflet", "REST API", "GIS / GeoJSON"],
+                features: ["Interactive map with hydrant markers", "Marker clustering for performance", "Filter by area / district", "Filter by status (working/damaged)", "Filter by hydrant type", "Detail popup with images", "Add/edit hydrant data", "Search by ID or location"],
+                role: "Team Leader — led architecture decisions, built the map integration and filtering logic, coordinated GIS data sourcing and API structure.",
+                challenges: "Performance with 500+ map markers, custom React components inside Leaflet popups, and working with GeoJSON spatial data formats for the first time.",
+                learned: "GIS coordinate systems, Leaflet performance optimization with marker clustering, and how to render React components inside Leaflet's non-React popup system.",
+                github: ""
+            }
+        };
+
+        // ─── RENDER BLOG CARDS ───────────────────────────────────────────────────────
+
+        function renderBlogCards() {
+            const grid = document.getElementById('blogGrid');
+            grid.innerHTML = blogs.map(b => `
+    <div class="blog-card" role="button" tabindex="0" onclick="openBlogDetail('${b.slug}')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); openBlogDetail('${b.slug}');}">
+      <div class="blog-tags">${b.tags.map(t => `<span class="blog-tag">${t}</span>`).join('')}</div>
+      <div class="blog-title">${b.title}</div>
+      <div class="blog-excerpt">${b.description}</div>
+      <div class="blog-meta">
+        <span class="blog-date">${b.date}</span>
+        <span class="blog-read">${b.readTime} →</span>
+      </div>
+    </div>
+  `).join('');
+        }
+
+        // ─── BLOG DETAIL ─────────────────────────────────────────────────────────────
+
+        function openBlogDetail(slug) {
+            const blog = blogs.find(b => b.slug === slug);
+            if (!blog) return;
+            const el = document.getElementById('blogDetailContent');
+            el.innerHTML = `
+    <div class="blog-tags" style="margin-bottom:1rem">${blog.tags.map(t => `<span class="blog-tag">${t}</span>`).join('')}</div>
+    <h1 class="blog-detail-title">${blog.title}</h1>
+    <div class="blog-detail-meta">
+      <span>📅 ${blog.date}</span>
+      <span>⏱ ${blog.readTime}</span>
+    </div>
+    <div class="blog-content">${blog.content}</div>
+  `;
+            document.getElementById('blogDetailOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+            window.scrollTo(0, 0);
+        }
+
+        function closeBlogDetail() {
+            document.getElementById('blogDetailOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // ─── CASE STUDY MODAL ────────────────────────────────────────────────────────
+
+        function openCaseStudy(key) {
+            const cs = caseStudies[key];
+            if (!cs) return;
+            const el = document.getElementById('caseStudyInner');
+            el.innerHTML = `
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem">
+      ${cs.badges.map(b => `<span class="badge badge-team">${b}</span>`).join('')}
+    </div>
+    <h2>${cs.title}</h2>
+
+    <div class="modal-section">
+      <h3>Overview</h3>
+      <p>${cs.overview}</p>
+    </div>
+    <div class="modal-section">
+      <h3>🔍 Problem</h3>
+      <p>${cs.problem}</p>
+    </div>
+    <div class="modal-section">
+      <h3>✅ Solution</h3>
+      <p>${cs.solution}</p>
+    </div>
+    <div class="modal-section">
+      <h3>⚙️ Tech Stack</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem">
+        ${cs.stack.map(t => `<span class="stack-tag">${t}</span>`).join('')}
+      </div>
+    </div>
+    <div class="modal-section">
+      <h3>✨ Features</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin-top:.5rem">
+        ${cs.features.map(f => `<div class="feature-item">${f}</div>`).join('')}
+      </div>
+    </div>
+    <div class="modal-section">
+      <h3>👤 My Role</h3>
+      <p>${cs.role}</p>
+    </div>
+    <div class="modal-section">
+      <h3>🧗 Challenges</h3>
+      <p>${cs.challenges}</p>
+    </div>
+    <div class="modal-section">
+      <h3>💡 What I Learned</h3>
+      <p>${cs.learned}</p>
+    </div>
+    ${cs.github ? `
+    <div class="modal-section">
+      <h3>🔗 Links</h3>
+      <a href="${cs.github}" target="_blank" rel="noopener" class="proj-link github" style="display:inline-flex;margin-top:.5rem">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+        View on GitHub
+      </a>
+    </div>
+    ` : ''}
+  `;
+            document.getElementById('caseStudyModal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCaseStudy() {
+            document.getElementById('caseStudyModal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // ─── THEME ───────────────────────────────────────────────────────────────────
+
+        const themeBtn = document.getElementById('themeBtn');
+        let isDark = true;
+
+        function applyTheme() {
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                document.documentElement.classList.remove('light');
+                themeBtn.textContent = '🌙';
+            } else {
+                document.documentElement.classList.add('light');
+                document.documentElement.classList.remove('dark');
+                themeBtn.textContent = '☀️';
+            }
+        }
+
+        themeBtn.addEventListener('click', () => {
+            isDark = !isDark;
+            applyTheme();
+        });
+
+        // ─── NAV ─────────────────────────────────────────────────────────────────────
+
+        document.getElementById('hamburger').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('open');
+        });
+
+        function closeMobile() {
+            document.getElementById('mobileMenu').classList.remove('open');
+        }
+
+        // Active nav link on scroll
+        const sections = ['about', 'skills', 'projects', 'experience', 'blog', 'contact'];
+        const navAnchors = document.querySelectorAll('.nav-links a');
+
+        function updateActiveNav() {
+            const scrollY = window.scrollY + 100;
+            let current = '';
+            sections.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && el.offsetTop <= scrollY) current = id;
+            });
+            navAnchors.forEach(a => {
+                a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+            });
+        }
+
+        // ─── SCROLL PROGRESS ─────────────────────────────────────────────────────────
+
+        function updateScrollProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            document.getElementById('scrollProgress').style.width = progress + '%';
+        }
+
+        // ─── INTERSECTION OBSERVER ────────────────────────────────────────────────────
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // ─── KEYBOARD ────────────────────────────────────────────────────────────────
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                closeCaseStudy();
+                if (document.getElementById('blogDetailOverlay').classList.contains('open')) closeBlogDetail();
+            }
+        });
+
+        // ─── SCROLL LISTENER ─────────────────────────────────────────────────────────
+
+        window.addEventListener('scroll', () => {
+            updateScrollProgress();
+            updateActiveNav();
+        }, { passive: true });
+
+        // ─── INIT ─────────────────────────────────────────────────────────────────────
+
+        renderBlogCards();
+        applyTheme();
+    </script>
+</body>
+
+</html>
